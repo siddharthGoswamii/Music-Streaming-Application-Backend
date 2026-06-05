@@ -25,5 +25,10 @@
   "bugs": {
     "url": "https://github.com/siddharthGoswamii/Music-Streaming-Application-Backend/issues"
   },
-  "homepage": "https://github.com/siddharthGoswamii/Music-Streaming-Application-Backend#readme"
+  "homepage": "https://github.com/siddharthGoswamii/Music-Streaming-Application-Backend#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
 }
