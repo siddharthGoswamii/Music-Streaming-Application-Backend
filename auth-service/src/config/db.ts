@@ -1,9 +1,15 @@
+// src/config/db.ts
+
 import { Pool } from "pg";
 
 export const pool = new Pool({
-  user: "postgres",
-  host: "localhost",
-  database: "music_streaming",
-  password: "admin123",
-  port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: Number(process.env.DB_PORT),
 });
+
+pool.connect()
+  .then(() => console.log("✅ PostgreSQL Connected"))
+  .catch((err: Error) => console.error("❌ PostgreSQL Connection Error:", err));

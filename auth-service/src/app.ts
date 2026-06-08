@@ -4,6 +4,9 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+// Initialize database connection
+import "./config/db";
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -24,3 +27,5 @@ app.get("/", (req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`🚀 Auth Service running on port ${PORT}`);
 });
+
+// Made with Bob
