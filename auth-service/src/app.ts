@@ -1,14 +1,19 @@
 import express, { type Request, type Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import authRoutes from "./routes/auth.routes";
+
+
 
 dotenv.config();
+
 
 // Initialize database connection
 import "./config/db";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+app.use("/auth", authRoutes);
 
 // Middleware
 app.use(cors());
