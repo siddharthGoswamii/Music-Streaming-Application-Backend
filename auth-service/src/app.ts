@@ -13,11 +13,12 @@ import "./config/db";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-app.use("/auth", authRoutes);
 
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+app.use("/auth", authRoutes);
 
 // Health Check Route
 app.get("/", (req: Request, res: Response) => {
