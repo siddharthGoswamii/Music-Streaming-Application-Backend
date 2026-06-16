@@ -12,5 +12,5 @@ export const pool = new Pool({
 });
 
 pool.connect()
-  .then(() => console.log("Music DB Connected"))
+  .then(() => console.log("✅ Music DB Connected"))
   .catch(console.error);
