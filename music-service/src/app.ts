@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+import "./config/db";
+
 const app = express();
 
 app.use(cors());
@@ -12,12 +14,12 @@ app.use(express.json());
 app.get("/", (_, res) => {
   res.json({
     success: true,
-    service: "Music Service"
+    service: "Music Service Running"
   });
 });
 
 const PORT = process.env.PORT || 3002;
 
 app.listen(PORT, () => {
-  console.log(` 🚀 Music Service running on ${PORT}`);
+  console.log(`🚀 Music Service running on port ${PORT}`);
 });
