@@ -19,5 +19,5 @@ app.get("/", (_, res) => {
 const PORT = process.env.PORT || 3002;
 
 app.listen(PORT, () => {
-  console.log(`Music Service running on ${PORT}`);
+  console.log(` 🚀 Music Service running on ${PORT}`);
 });
