@@ -9,7 +9,7 @@ import {
 export const addArtist = async (
   req: Request,
   res: Response
-) => {
+): Promise<void> => {
 
   try {
 
@@ -43,7 +43,7 @@ export const addArtist = async (
 export const fetchArtists = async (
   req: Request,
   res: Response
-) => {
+): Promise<void> => {
 
   try {
 
@@ -68,26 +68,28 @@ export const fetchArtists = async (
 export const fetchArtistById = async (
   req: Request,
   res: Response
-) => {
+): Promise<void> => {
 
   try {
 
     const { id } = req.params;
 
     if (!id || typeof id !== 'string') {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         message: 'Invalid artist ID'
       });
+      return;
     }
 
     const artist = await getArtistById(id);
 
     if (!artist) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
         message: 'Artist not found'
       });
+      return;
     }
 
     res.json({
