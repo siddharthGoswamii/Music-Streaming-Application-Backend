@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import artistRoutes from "./routes/artist.routes";
 import albumRoutes from "./routes/album.routes";
+import trackRoutes from "./routes/track.routes";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/artists", artistRoutes);
 app.use("/albums", albumRoutes);
+app.use("/tracks", trackRoutes);
 
 app.get("/", (_, res) => {
   res.json({
