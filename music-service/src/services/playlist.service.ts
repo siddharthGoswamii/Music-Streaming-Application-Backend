@@ -47,3 +47,24 @@ export const getPlaylistById = async (
 
   return result.rows[0];
 };
+
+export const addTrackToPlaylist = async (
+  playlistId: string,
+  trackId: string
+) => {
+
+  const result = await pool.query(
+    `
+    INSERT INTO playlist_tracks
+    (
+      playlist_id,
+      track_id
+    )
+    VALUES ($1,$2)
+    RETURNING *
+    `,
+    [playlistId, trackId]
+  );
+
+  return result.rows[0];
+};
