@@ -3,7 +3,8 @@ import type { Request, Response } from "express";
 import {
   createPlaylist,
   getAllPlaylists,
-  getPlaylistById
+  getPlaylistById,
+  addTrackToPlaylist
 } from "../services/playlist.service";
 
 export const addPlaylist = async (
@@ -105,5 +106,40 @@ export const fetchPlaylistById = async (
     });
 
   }
+};
+
+export const addTrack = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const { playlistId } = req.params;
+
+    const { trackId } = req.body;
+
+    // Ensure playlistId is a string (Express params can be string | string[])
+    const playlistIdStr = Array.isArray(playlistId) ? playlistId[0] : playlistId;
+
+    const result = await addTrackToPlaylist(
+      playlistIdStr,
+      trackId
+    );
+
+    res.status(201).json({
+      success: true,
+      result
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
 };
 
