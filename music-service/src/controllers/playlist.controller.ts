@@ -65,7 +65,7 @@ export const fetchPlaylists = async (
   }
 
 };
-
+    
 export const fetchPlaylistById = async (
   req: Request,
   res: Response
@@ -83,15 +83,31 @@ export const fetchPlaylistById = async (
       return;
     }
 
-    const playlist = await getPlaylistById(Array.isArray(id) ? id[0] : id);
+    const rows = await getPlaylistById(Array.isArray(id) ? id[0] : id);
 
-    if (!playlist) {
+
+    if (rows.length === 0) {
       res.status(404).json({
         success: false,
         message: "Playlist not found"
       });
       return;
     }
+
+    const playlist = {
+      id: rows[0].playlist_id,
+      name: rows[0].playlist_name,
+      description: rows[0].description,
+
+      tracks: rows
+        .filter(row => row.track_id)
+        .map(row => ({
+          id: row.track_id,
+          title: row.title,
+          duration: row.duration,
+          audio_url: row.audio_url
+        }))
+    };
 
     res.status(200).json({
       success: true,
