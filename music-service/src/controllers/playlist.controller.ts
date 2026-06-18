@@ -72,27 +72,27 @@ export const fetchPlaylistById = async (
 
   try {
 
-    const { user_id } = req.params;
+    const { id } = req.params;
 
-    if (!user_id || typeof user_id !== 'string') {
+    if (!id) {
       res.status(400).json({
         success: false,
-        message: 'Invalid playlist ID'
+        message: "Playlist ID is required"
       });
       return;
     }
 
-    const playlist = await getPlaylistById(user_id);
+    const playlist = await getPlaylistById(Array.isArray(id) ? id[0] : id);
 
     if (!playlist) {
       res.status(404).json({
         success: false,
-        message: 'Playlist not found'
+        message: "Playlist not found"
       });
       return;
     }
 
-    res.json({
+    res.status(200).json({
       success: true,
       playlist
     });
@@ -105,6 +105,5 @@ export const fetchPlaylistById = async (
     });
 
   }
-
 };
 
