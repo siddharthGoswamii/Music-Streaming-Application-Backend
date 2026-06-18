@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import artistRoutes from "./routes/artist.routes";
 import albumRoutes from "./routes/album.routes";
 import trackRoutes from "./routes/track.routes";
+import playlistRoutes from "./routes/playlist.routes";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/artists", artistRoutes);
 app.use("/albums", albumRoutes);
 app.use("/tracks", trackRoutes);
+app.use("/playlists", playlistRoutes);
 
 app.get("/", (_, res) => {
   res.json({
