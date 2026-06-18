@@ -5,44 +5,45 @@ export const createPlaylist = async (
   name: string,
   description: string
 ) => {
-    const result = await pool.query(
-        `
-        INSERT INTO playlists
-        (user_id,name,description)
-        VALUES($1,$2,$3)
-        RETURNING *
-        `,
-    [userId,name,description]
-    );
-    return result.rows[0];
 
+  const result = await pool.query(
+    `
+    INSERT INTO playlists
+    (user_id,name,description)
+    VALUES($1,$2,$3)
+    RETURNING *
+    `,
+    [userId, name, description]
+  );
+
+  return result.rows[0];
 };
 
 export const getAllPlaylists = async () => {
 
-    const result = await pool.query(
-        `
-        SELECT *
-        FROM playlists
-        ORDER BY created_at DESC
-        `
-    );
+  const result = await pool.query(
+    `
+    SELECT *
+    FROM playlists
+    ORDER BY created_at DESC
+    `
+  );
 
-    return result.rows;
+  return result.rows;
 };
 
 export const getPlaylistById = async (
-    id: string
+  id: string
 ) => {
 
-    const result = await pool.query(
-        `
-        SELECT *
-        FROM playlists
-        WHERE id = $1
-        `,
-        [id]
-    );
+  const result = await pool.query(
+    `
+    SELECT *
+    FROM playlists
+    WHERE id = $1
+    `,
+    [id]
+  );
 
-    return result.rows[0];
+  return result.rows[0];
 };
