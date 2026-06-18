@@ -38,14 +38,30 @@ export const getPlaylistById = async (
 
   const result = await pool.query(
     `
-    SELECT *
-    FROM playlists
-    WHERE id = $1
+    SELECT
+      p.id AS playlist_id,
+      p.name AS playlist_name,
+      p.description,
+
+      t.id AS track_id,
+      t.title,
+      t.duration,
+      t.audio_url
+
+    FROM playlists p
+
+    LEFT JOIN playlist_tracks pt
+      ON p.id = pt.playlist_id
+
+    LEFT JOIN tracks t
+      ON pt.track_id = t.id
+
+    WHERE p.id = $1
     `,
     [id]
   );
 
-  return result.rows[0];
+  return result.rows;
 };
 
 export const addTrackToPlaylist = async (
