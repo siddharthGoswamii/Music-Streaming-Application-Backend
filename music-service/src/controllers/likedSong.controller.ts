@@ -12,12 +12,13 @@ export const addLikedSong = async (
 
   try {
 
-    const { userId, trackId } = req.body;
+    const { user_id, track_id } = req.body;
+    const song = await likeSong(user_id, track_id);
 
-    const song = await likeSong(
-      userId,
-      trackId
-    );
+    // const song = await likeSong(
+    //   userId,
+    //   trackId
+    // );
 
     res.status(201).json({
       success: true,
