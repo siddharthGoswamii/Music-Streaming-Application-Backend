@@ -15,10 +15,6 @@ export const addLikedSong = async (
     const { user_id, track_id } = req.body;
     const song = await likeSong(user_id, track_id);
 
-    // const song = await likeSong(
-    //   userId,
-    //   trackId
-    // );
 
     res.status(201).json({
       success: true,
