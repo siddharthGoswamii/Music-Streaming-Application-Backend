@@ -6,6 +6,7 @@ import albumRoutes from "./routes/album.routes";
 import trackRoutes from "./routes/track.routes";
 import playlistRoutes from "./routes/playlist.routes";
 import likedSongRoutes from "./routes/likedSong.routes";
+import historyRoutes from "./routes/history.routes";
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use("/albums", albumRoutes);
 app.use("/tracks", trackRoutes);
 app.use("/playlists", playlistRoutes);
 app.use("/liked-songs", likedSongRoutes);
+app.use("/history", historyRoutes);
 
 app.get("/", (_, res) => {
   res.json({
