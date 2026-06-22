@@ -15,6 +15,15 @@ export const addPlayHistory = async (
     [userId, trackId]
   );
 
+  await pool.query(
+  `
+  UPDATE tracks
+  SET play_count = play_count + 1
+  WHERE id = $1
+  `,
+  [trackId]
+);
+
   return result.rows[0];
 };
 
