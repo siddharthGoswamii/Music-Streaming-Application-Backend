@@ -113,7 +113,11 @@ export const fetchTrendingTracks = async (
 
   try {
 
+    console.log("TRENDING CONTROLLER HIT");
+
     const tracks = await getTrendingTracks();
+
+    console.log("TRACKS:", tracks);
 
     res.status(200).json({
       success: true,
@@ -121,6 +125,8 @@ export const fetchTrendingTracks = async (
     });
 
   } catch (error: any) {
+
+    console.log("TRENDING ERROR:", error);
 
     res.status(500).json({
       success: false,
