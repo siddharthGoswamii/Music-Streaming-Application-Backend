@@ -4,7 +4,8 @@ import {
   createTrack,
   getAllTracks,
   getTrackById,
-  getTrendingTracks
+  getTrendingTracks,
+  searchTracks
 } from "../services/track.service";
 
 export const addTrack = async (
@@ -127,4 +128,40 @@ export const fetchTrendingTracks = async (
     });
 
   }
+};
+
+export const searchTrack = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const { q } = req.query;
+
+    if (!q || typeof q !== "string") {
+      res.status(400).json({
+        success: false,
+        message: "Search keyword is required"
+      });
+      return;
+    }
+
+    const tracks = await searchTracks(q);
+
+    res.status(200).json({
+      success: true,
+      count: tracks.length,
+      tracks
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
 };
