@@ -3,7 +3,8 @@ import { Request, Response } from "express";
 import {
   createTrack,
   getAllTracks,
-  getTrackById
+  getTrackById,
+  getTrendingTracks
 } from "../services/track.service";
 
 export const addTrack = async (
@@ -102,4 +103,28 @@ export const fetchTrackById = async (
     });
   }
 
+};
+
+export const fetchTrendingTracks = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const tracks = await getTrendingTracks();
+
+    res.status(200).json({
+      success: true,
+      tracks
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
 };
