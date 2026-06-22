@@ -76,3 +76,19 @@ export const getTrendingTracks = async () => {
 
   return result.rows;
 };
+
+export const searchTracks = async (
+  keyword: string
+) => {
+
+  const result = await pool.query(
+    `
+    SELECT *
+    FROM tracks
+    WHERE title ILIKE $1
+    `,
+    [`%${keyword}%`]
+  );
+
+  return result.rows;
+};
