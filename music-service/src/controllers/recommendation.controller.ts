@@ -1,4 +1,3 @@
-console.log("RECOMMENDATION CONTROLLER LOADED");
 import { Request, Response } from "express";
 
 import {
