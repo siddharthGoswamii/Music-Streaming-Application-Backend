@@ -65,3 +65,14 @@ export const getTrackById = async (
 
   return result.rows[0];
 };
+
+export const getTrendingTracks = async () => {
+  const result = await pool.query(`
+    SELECT *
+    FROM tracks
+    ORDER BY created_at DESC
+    LIMIT 20
+  `);
+
+  return result.rows;
+};
