@@ -70,7 +70,7 @@ export const getTrendingTracks = async () => {
   const result = await pool.query(`
     SELECT *
     FROM tracks
-    ORDER BY created_at DESC
+    ORDER BY play_count DESC
     LIMIT 20
   `);
 
