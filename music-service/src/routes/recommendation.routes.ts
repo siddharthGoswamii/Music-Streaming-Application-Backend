@@ -1,3 +1,4 @@
+console.log("RECOMMENDATION ROUTES LOADED");
 import { Router } from "express";
 
 import {
