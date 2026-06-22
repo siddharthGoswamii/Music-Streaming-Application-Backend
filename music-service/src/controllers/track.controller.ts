@@ -74,6 +74,8 @@ export const fetchTrackById = async (
 
   try {
     const { id } = req.params;
+    
+    console.log("FETCH TRACK BY ID HIT - ID:", id);
 
     if (!id || typeof id !== 'string') {
       res.status(400).json({
