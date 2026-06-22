@@ -16,9 +16,10 @@ router.get("/", fetchTracks);
 
 router.get("/search", searchTrack);
 
+router.get("/trending", fetchTrendingTracks);
+
 router.get("/:id", fetchTrackById);
 
-router.get("/trending", fetchTrendingTracks);
 
 
 export default router;
