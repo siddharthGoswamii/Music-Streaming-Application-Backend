@@ -5,7 +5,8 @@ import {
   getAllTracks,
   getTrackById,
   getTrendingTracks,
-  searchTracks
+  searchTracks,
+  updateTrack
 } from "../services/track.service";
 
 export const addTrack = async (
@@ -172,4 +173,63 @@ export const searchTrack = async (
 
   }
 
+};
+
+// UPDATE TRACKS
+
+export const editTrack = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const { id } = req.params;
+
+    if (!id || typeof id !== 'string') {
+      res.status(400).json({
+        success: false,
+        message: 'Invalid track ID'
+      });
+      return;
+    }
+
+    const {
+      title,
+      artistId,
+      albumId,
+      duration,
+      audioUrl
+    } = req.body;
+
+    const track = await updateTrack(
+      id,
+      title,
+      artistId,
+      albumId,
+      duration,
+      audioUrl
+    );
+
+    if (!track) {
+      res.status(404).json({
+        success: false,
+        message: 'Track not found'
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      track
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
 };
