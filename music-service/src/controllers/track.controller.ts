@@ -6,7 +6,8 @@ import {
   getTrackById,
   getTrendingTracks,
   searchTracks,
-  updateTrack
+  updateTrack,
+  deleteTrack
 } from "../services/track.service";
 
 export const addTrack = async (
@@ -215,6 +216,50 @@ export const editTrack = async (
       res.status(404).json({
         success: false,
         message: 'Track not found'
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      track
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+};
+
+//DELETE TRACK
+
+export const removeTrack = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const { id } = req.params;
+
+    if (!id || typeof id !== "string") {
+      res.status(400).json({
+        success: false,
+        message: "Invalid track ID"
+      });
+      return;
+    }
+
+    const track = await deleteTrack(id);
+
+    if (!track) {
+      res.status(404).json({
+        success: false,
+        message: "Track not found"
       });
       return;
     }
