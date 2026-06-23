@@ -4,7 +4,8 @@ import {
   createArtist,
   getAllArtists,
   getArtistById,
-  updateArtist
+  updateArtist,
+  deleteArtist
 } from "../services/artist.service";
 
 export const addArtist = async (
@@ -163,3 +164,48 @@ export const editArtist = async (
 
   }
 };
+
+//DELETE ARTIST
+
+export const removeArtist = async (
+
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const { id } = req.params;
+
+    if (!id || typeof id !== "string") {
+      res.status(400).json({
+        success: false,
+        message: "Invalid artist ID"
+      });
+      return;
+    }
+
+    const track = await deleteArtist(id);
+
+    if (!track) {
+      res.status(404).json({
+        success: false,
+        message: "Artist not found"
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      track
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+}; 
