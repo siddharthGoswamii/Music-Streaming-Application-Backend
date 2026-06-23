@@ -93,7 +93,7 @@ export const searchTracks = async (
   return result.rows;
 };
 
-//UPDATE TRACKS
+//UPDATE TRACKS(PUT REQUEST BODY)
 
 export const updateTrack = async (
   id: string,
@@ -124,6 +124,24 @@ export const updateTrack = async (
       audioUrl,
       id
     ]
+  );
+
+  return result.rows[0];
+};
+
+//DELETE REQUEST BODY
+
+export const deleteTrack = async (
+  id: string
+) => {
+
+  const result = await pool.query(
+    `
+    DELETE FROM tracks
+    WHERE id = $1
+    RETURNING *
+    `,
+    [id]
   );
 
   return result.rows[0];
