@@ -38,3 +38,37 @@ export const getArtistById = async (
 
   return result.rows[0];
 };
+
+// UPDATE ARTIST
+
+export const updateArtist = async (
+  id: string,
+  name: string,
+  bio: string,
+  image_url: string
+) => {
+  const result = await pool.query(
+    `
+    UPDATE artists
+    SET 
+    name = $1, 
+    bio = $2, 
+    image_url = $3
+    WHERE id = $4
+    RETURNING *
+    `,
+    [
+    name, 
+    bio, 
+    image_url, 
+    id
+    ]
+  );
+
+  return result.rows[0];
+};
+
+
+
+
+
