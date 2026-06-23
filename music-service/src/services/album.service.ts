@@ -49,3 +49,29 @@ export const getAlbumById = async (
 
   return result.rows[0];
 };
+
+//UPDATE ALBUM
+
+export const updateAlbum = async (
+  id: string,
+  title: string,
+  artistId: string,
+  coverImage: string,
+  releaseDate: string
+) => {
+  const result = await pool.query(
+    `
+    UPDATE albums
+    SET 
+    title = $1, 
+    artist_id = $2,
+    cover_image = $3,
+    release_date = $4
+    WHERE id = $5
+    RETURNING *
+    `,
+    [title, artistId, coverImage, releaseDate, id]
+  );
+  
+  return result.rows[0];
+};
