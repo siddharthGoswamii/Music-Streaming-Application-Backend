@@ -75,3 +75,19 @@ export const updateAlbum = async (
   
   return result.rows[0];
 };
+
+//DELETE ALBUM
+
+export const deleteAlbum = async (
+  id: string
+) => {
+  const result = await pool.query(
+    `
+    DELETE FROM albums
+    WHERE id = $1
+    RETURNING *
+    `,
+    [id]
+  );
+  return result.rows[0];  
+};
