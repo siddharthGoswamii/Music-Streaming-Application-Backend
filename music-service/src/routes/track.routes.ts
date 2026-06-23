@@ -5,7 +5,8 @@ import {
   fetchTracks,
   fetchTrendingTracks,
   searchTrack,
-  fetchTrackById
+  fetchTrackById,
+  editTrack
 } from "../controllers/track.controller";
 
 const router = Router();
@@ -19,6 +20,8 @@ router.get("/trending", fetchTrendingTracks);
 router.get("/search", searchTrack);
 
 router.get("/:id", fetchTrackById);
+
+router.put("/:id", editTrack);
 
 
 
