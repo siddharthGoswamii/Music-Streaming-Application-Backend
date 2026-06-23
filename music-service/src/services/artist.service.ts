@@ -68,6 +68,19 @@ export const updateArtist = async (
   return result.rows[0];
 };
 
+//DELETE ARTIST
+
+export const deleteArtist = async (
+  id: string
+) => {
+  const result = await pool.query(
+    "DELETE FROM artists WHERE id = $1",
+    [id]
+  );
+
+  return result.rows[0];
+};
+
 
 
 
