@@ -92,3 +92,39 @@ export const searchTracks = async (
 
   return result.rows;
 };
+
+//UPDATE TRACKS
+
+export const updateTrack = async (
+  id: string,
+  title: string,
+  artistId: string,
+  albumId: string,
+  duration: number,
+  audioUrl: string
+) => {
+
+  const result = await pool.query(
+    `
+    UPDATE tracks
+    SET
+      title = $1,
+      artist_id = $2,
+      album_id = $3,
+      duration = $4,
+      audio_url = $5
+    WHERE id = $6
+    RETURNING *
+    `,
+    [
+      title,
+      artistId,
+      albumId,
+      duration,
+      audioUrl,
+      id
+    ]
+  );
+
+  return result.rows[0];
+};
