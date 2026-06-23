@@ -4,7 +4,8 @@ import {
   addAlbum,
   fetchAlbums,
   fetchAlbumById,
-  editAlbum
+  editAlbum,
+  removeAlbum
 } from "../controllers/album.controller";
 
 const router = Router();
@@ -17,5 +18,6 @@ router.get("/:id", fetchAlbumById);
 
 router.put("/:id", editAlbum);
 
+router.delete("/:id", removeAlbum);
 
 export default router;
