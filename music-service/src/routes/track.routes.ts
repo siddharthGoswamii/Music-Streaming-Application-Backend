@@ -6,7 +6,8 @@ import {
   fetchTrendingTracks,
   searchTrack,
   fetchTrackById,
-  editTrack
+  editTrack,
+  removeTrack
 } from "../controllers/track.controller";
 
 const router = Router();
@@ -23,6 +24,7 @@ router.get("/:id", fetchTrackById);
 
 router.put("/:id", editTrack);
 
+router.delete("/:id", removeTrack);
 
 
 export default router;
