@@ -5,7 +5,8 @@ import {
   getAllArtists,
   getArtistById,
   updateArtist,
-  deleteArtist
+  deleteArtist,
+  getArtistTracks,
 } from "../services/artist.service";
 
 export const addArtist = async (
@@ -209,3 +210,33 @@ export const removeArtist = async (
 
   }
 }; 
+
+//GET ARTIST DETAILS WITH SONGS
+
+
+export const fetchArtistTracks = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const { id } = req.params;
+
+    const tracks = await getArtistTracks(Array.isArray(id) ? id[0] : id);
+
+    res.status(200).json({
+      success: true,
+      count: tracks.length,
+      tracks
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+};
