@@ -4,7 +4,8 @@ import {
   createPlaylist,
   getAllPlaylists,
   getPlaylistById,
-  addTrackToPlaylist
+  addTrackToPlaylist,
+  updatePlaylist
 } from "../services/playlist.service";
 
 export const addPlaylist = async (
@@ -159,3 +160,47 @@ export const addTrack = async (
 
 };
 
+// UPDATE PLAYLIST
+
+export const editPlaylist = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const { id } = req.params;
+
+    const {
+      name,
+      description
+    } = req.body;
+
+    const playlist = await updatePlaylist(
+      id as string,
+      name,
+      description
+    );
+
+    if (!playlist) {
+      res.status(404).json({
+        success: false,
+        message: "Playlist not found"
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      playlist
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+};
