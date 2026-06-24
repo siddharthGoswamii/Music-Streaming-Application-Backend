@@ -4,7 +4,9 @@ import {
   addPlaylist,
   fetchPlaylists,
   fetchPlaylistById,
-   addTrack
+  addTrack,
+  editPlaylist,
+
 } from "../controllers/playlist.controller";
 
 const router = Router();
@@ -16,5 +18,7 @@ router.get("/", fetchPlaylists);
 router.get("/:id", fetchPlaylistById);
 
 router.post("/:playlistId/tracks", addTrack);
+
+router.put("/:id", editPlaylist);
 
 export default router;
