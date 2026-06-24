@@ -5,7 +5,8 @@ import {
   fetchAlbums,
   fetchAlbumById,
   editAlbum,
-  removeAlbum
+  removeAlbum,
+  fetchAlbumTracks
 } from "../controllers/album.controller";
 
 const router = Router();
@@ -13,6 +14,8 @@ const router = Router();
 router.post("/", addAlbum);
 
 router.get("/", fetchAlbums);
+
+router.get("/:id/tracks", fetchAlbumTracks);
 
 router.get("/:id", fetchAlbumById);
 
