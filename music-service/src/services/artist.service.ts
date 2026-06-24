@@ -81,6 +81,24 @@ export const deleteArtist = async (
   return result.rows[0];
 };
 
+//GET ARTIST DETAILS WITH SONGS
+
+export const getArtistTracks = async (
+  artistId: string
+) => {
+
+  const result = await pool.query(
+    `
+    SELECT *
+    FROM tracks
+    WHERE artist_id = $1
+    `,
+    [artistId]
+  );
+
+  return result.rows;
+};
+
 
 
 
