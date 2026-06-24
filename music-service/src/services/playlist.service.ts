@@ -129,3 +129,23 @@ export const deletePlaylist = async (
 
   return result.rows[0];
 };
+
+// REMOVE TRACK FROM PLAYLIST
+
+  export const removeTrackFromPlaylist = async (
+  playlistId: string,
+  trackId: string
+) => {
+
+  const result = await pool.query(
+    `
+    DELETE FROM playlist_tracks
+    WHERE playlist_id = $1
+    AND track_id = $2
+    RETURNING *
+    `,
+    [playlistId, trackId]
+  );
+
+  return result.rows[0];
+};
