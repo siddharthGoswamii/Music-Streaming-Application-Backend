@@ -5,7 +5,8 @@ import {
   getAllAlbums,
   getAlbumById,
   updateAlbum,
-  deleteAlbum
+  deleteAlbum,
+  getAlbumTracks
 } from "../services/album.service";
 
 export const addAlbum = async (
@@ -190,6 +191,36 @@ export const removeAlbum = async (
     res.status(200).json({
       success: true,
       album
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+};
+
+// GET ALBUM DETAILS WITH SONGS
+
+
+export const fetchAlbumTracks = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const { id } = req.params;
+
+    const tracks = await getAlbumTracks(id as string);
+
+    res.status(200).json({
+      success: true,
+      count: tracks.length,
+      tracks
     });
 
   } catch (error: any) {
