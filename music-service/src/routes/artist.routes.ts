@@ -15,13 +15,13 @@ router.post("/", addArtist);
 
 router.get("/", fetchArtists);
 
+router.get("/:id/tracks", fetchArtistTracks);
+
 router.get("/:id", fetchArtistById);
 
 router.put("/:id", editArtist);
 
 router.delete("/:id", removeArtist);
-
-router.get("/:id/tracks", fetchArtistTracks);
 
 
 export default router;
