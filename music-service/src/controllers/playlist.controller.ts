@@ -5,7 +5,8 @@ import {
   getAllPlaylists,
   getPlaylistById,
   addTrackToPlaylist,
-  updatePlaylist
+  updatePlaylist,
+  deletePlaylist
 } from "../services/playlist.service";
 
 export const addPlaylist = async (
@@ -192,6 +193,43 @@ export const editPlaylist = async (
 
     res.status(200).json({
       success: true,
+      playlist
+    });
+
+  } catch (error: any) {
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+};
+
+// DELETE PLAYLIST
+
+export const removePlaylist = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+
+  try {
+
+    const { id } = req.params;
+
+    const playlist = await deletePlaylist(Array.isArray(id) ? id[0] : id);
+
+    if (!playlist) {
+      res.status(404).json({
+        success: false,
+        message: "Playlist not found"
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Playlist deleted successfully",
       playlist
     });
 
