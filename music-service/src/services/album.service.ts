@@ -91,3 +91,21 @@ export const deleteAlbum = async (
   );
   return result.rows[0];  
 };
+
+//GET ALBUM DETAILS WITH SONGS 
+
+export const getAlbumTracks = async (
+  albumId: string
+) => {
+
+  const result = await pool.query(
+    `
+    SELECT *
+    FROM tracks
+    WHERE album_id = $1
+    `,
+    [albumId]
+  );
+
+  return result.rows;
+};
