@@ -5,7 +5,8 @@ import {
   fetchArtists,
   fetchArtistById,
   editArtist,
-  removeArtist
+  removeArtist,
+  fetchArtistTracks
 } from "../controllers/artist.controller";
 
 const router = Router();
@@ -19,6 +20,8 @@ router.get("/:id", fetchArtistById);
 router.put("/:id", editArtist);
 
 router.delete("/:id", removeArtist);
+
+router.get("/:id/tracks", fetchArtistTracks);
 
 
 export default router;
