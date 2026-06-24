@@ -84,3 +84,30 @@ export const addTrackToPlaylist = async (
 
   return result.rows[0];
 };
+
+// UPDATE PLAYLIST 
+
+export const updatePlaylist = async (
+  id: string,
+  name: string,
+  description: string
+) => {
+
+  const result = await pool.query(
+    `
+    UPDATE playlists
+    SET
+      name = $1,
+      description = $2
+    WHERE id = $3
+    RETURNING *
+    `,
+    [
+      name,
+      description,
+      id
+    ]
+  );
+
+  return result.rows[0];
+};
