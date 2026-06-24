@@ -111,3 +111,21 @@ export const updatePlaylist = async (
 
   return result.rows[0];
 };
+
+// DELETE PLAYLIST
+
+export const deletePlaylist = async (
+  id: string
+) => {
+
+  const result = await pool.query(
+    `
+    DELETE FROM playlists
+    WHERE id = $1
+    RETURNING *
+    `,
+    [id]
+  );
+
+  return result.rows[0];
+};
