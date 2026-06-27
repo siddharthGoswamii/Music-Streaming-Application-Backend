@@ -213,7 +213,6 @@ export const removeArtist = async (
 
 //GET ARTIST DETAILS WITH SONGS
 
-
 export const fetchArtistTracks = async (
   req: Request,
   res: Response
