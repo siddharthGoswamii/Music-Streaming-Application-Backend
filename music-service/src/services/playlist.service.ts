@@ -132,7 +132,7 @@ export const deletePlaylist = async (
 
 // REMOVE TRACK FROM PLAYLIST
 
-  export const removeTrackFromPlaylist = async (
+export const removeTrackFromPlaylist = async (
   playlistId: string,
   trackId: string
 ) => {
