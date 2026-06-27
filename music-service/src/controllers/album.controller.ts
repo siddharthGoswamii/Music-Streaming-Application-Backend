@@ -205,7 +205,6 @@ export const removeAlbum = async (
 
 // GET ALBUM DETAILS WITH SONGS
 
-
 export const fetchAlbumTracks = async (
   req: Request,
   res: Response
