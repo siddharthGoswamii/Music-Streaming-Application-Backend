@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { esClient } from "../config/elasticsearch";
 
 import {
     addTrackToIndex,
