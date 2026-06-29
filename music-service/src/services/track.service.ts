@@ -8,7 +8,8 @@ export const createTrack = async (
   audioUrl: string
 ) => {
 
-  const result = await pool.query(
+  // Insert track
+  const insert = await pool.query(
     `
     INSERT INTO tracks
     (
@@ -18,8 +19,8 @@ export const createTrack = async (
       duration,
       audio_url
     )
-    VALUES($1,$2,$3,$4,$5)
-    RETURNING *
+    VALUES ($1,$2,$3,$4,$5)
+    RETURNING id
     `,
     [
       title,
@@ -28,6 +29,28 @@ export const createTrack = async (
       duration,
       audioUrl
     ]
+  );
+
+  const trackId = insert.rows[0].id;
+
+  // Fetch complete track details
+  const result = await pool.query(
+    `
+    SELECT
+      t.id,
+      t.title,
+      t.duration,
+      t.audio_url,
+      ar.name AS artist_name,
+      al.title AS album_title
+    FROM tracks t
+    JOIN artists ar
+      ON ar.id = t.artist_id
+    JOIN albums al
+      ON al.id = t.album_id
+    WHERE t.id = $1
+    `,
+    [trackId]
   );
 
   return result.rows[0];
