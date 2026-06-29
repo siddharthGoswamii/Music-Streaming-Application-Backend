@@ -3,6 +3,7 @@ import express from 'express'
 import searchRouter from './routes/search.routes'
 import { connectES } from './config/elasticsearch'
 import { connectRedis } from './config/redis'
+import internalRoutes from "./routes/internal.routes";
 
 const app = express()
 app.use(express.json())
