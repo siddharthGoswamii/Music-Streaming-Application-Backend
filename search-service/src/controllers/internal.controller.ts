@@ -8,27 +8,33 @@ import {
 } from "../services/internal.service";
 
 export const indexTrack = async (
-    req: Request,
-    res: Response
+  req: Request,
+  res: Response
 ): Promise<void> => {
 
-    try {
+  try {
 
-        const track = await addTrackToIndex(req.body);
+    const track = req.body;
 
-        res.status(201).json({
-            success: true,
-            track
-        });
+    await esClient.index({
+      index: "tracks",
+      id: track.id,
+      document: track
+    });
 
-    } catch (error: any) {
+    res.status(200).json({
+      success: true,
+      message: "Track indexed"
+    });
 
-        res.status(500).json({
-            success: false,
-            message: error.message
-        });
+  } catch (error: any) {
 
-    }
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
 
 };
 
