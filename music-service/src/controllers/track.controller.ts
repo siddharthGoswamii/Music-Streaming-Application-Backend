@@ -26,6 +26,7 @@ export const addTrack = async (
       audioUrl
     } = req.body;
 
+    // Save in PostgreSQL
     const track = await createTrack(
       title,
       artistId,
@@ -33,6 +34,22 @@ export const addTrack = async (
       duration,
       audioUrl
     );
+
+    // Send to Search Service
+    try {
+
+      await axios.post(
+        "http://localhost:3003/internal/index",
+        track
+      );
+
+      console.log("Track indexed successfully");
+
+    } catch (err: any) {
+
+      console.log("Search Service Error:", err.message);
+
+    }
 
     res.status(201).json({
       success: true,
@@ -47,6 +64,7 @@ export const addTrack = async (
     });
 
   }
+
 };
 
 export const fetchTracks = async (
