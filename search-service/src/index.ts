@@ -10,6 +10,7 @@ app.use(express.json())
 
 app.use('/search', searchRouter)
 app.get('/health', (_, res) => res.json({ status: 'ok' }))
+app.use("/internal", internalRoutes);
 
 const start = async () => {
   await connectES()
