@@ -38,7 +38,7 @@ export const updateTrack = async (
 
     try {
 
-        const { id } = req.params;
+        const { id } = req.params as { id: string };
 
         const track = await updateTrackIndex(
             id,
@@ -68,7 +68,7 @@ export const deleteTrack = async (
 
     try {
 
-        const { id } = req.params;
+        const id = req.params.id as string;
 
         await removeTrackIndex(id);
 
