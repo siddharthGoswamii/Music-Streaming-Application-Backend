@@ -14,17 +14,11 @@ export const indexTrack = async (
 
   try {
 
-    const track = req.body;
-
-    await esClient.index({
-      index: "tracks",
-      id: track.id,
-      document: track
-    });
+    const track = await addTrackToIndex(req.body);
 
     res.status(200).json({
       success: true,
-      message: "Track indexed"
+      track
     });
 
   } catch (error: any) {
