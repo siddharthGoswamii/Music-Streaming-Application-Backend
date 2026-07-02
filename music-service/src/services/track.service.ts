@@ -127,7 +127,7 @@ export const updateTrack = async (
   audioUrl: string
 ) => {
 
-  const result = await pool.query(
+  await pool.query(
     `
     UPDATE tracks
     SET
@@ -137,7 +137,6 @@ export const updateTrack = async (
       duration = $4,
       audio_url = $5
     WHERE id = $6
-    RETURNING *
     `,
     [
       title,
@@ -147,6 +146,22 @@ export const updateTrack = async (
       audioUrl,
       id
     ]
+  );
+
+  const result = await pool.query(
+    `
+    SELECT
+      tracks.*,
+      artists.name AS artist_name,
+      albums.title AS album_title
+    FROM tracks
+    JOIN artists
+      ON tracks.artist_id = artists.id
+    JOIN albums
+      ON tracks.album_id = albums.id
+    WHERE tracks.id = $1
+    `,
+    [id]
   );
 
   return result.rows[0];
