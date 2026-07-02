@@ -47,7 +47,13 @@ export const addTrack = async (
 
     } catch (err: any) {
 
-      console.log("Search Service Error:", err.message);
+      console.error("Search Service Error:");
+
+      console.error("Message:", err.message);
+
+      console.error("Code:", err.code);
+
+      console.error("Response:", err.response?.data);
 
     }
 
