@@ -301,6 +301,23 @@ export const removeTrack = async (
       return;
     }
 
+    try {
+
+    await axios.delete(
+        `http://localhost:3003/internal/index/${id}`
+    );
+
+    console.log("Track removed from Elasticsearch");
+
+} catch (err: any) {
+
+    console.error(
+        "Failed to remove from Elasticsearch:",
+        err.message
+    );
+
+}
+
     res.status(200).json({
       success: true,
       track
