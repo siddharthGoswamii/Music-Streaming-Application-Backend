@@ -309,14 +309,14 @@ export const removeTrack = async (
 
     console.log("Track removed from Elasticsearch");
 
-} catch (err: any) {
+    } catch (err: any) {
 
     console.error(
         "Failed to remove from Elasticsearch:",
         err.message
     );
 
-}
+    }
 
     res.status(200).json({
       success: true,
