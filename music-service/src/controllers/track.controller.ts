@@ -239,6 +239,24 @@ export const editTrack = async (
       return;
     }
 
+        try {
+
+      await axios.put(
+        `http://localhost:3003/internal/index/${track.id}`,
+        track
+      );
+
+      console.log("Track updated in Elasticsearch");
+
+    } catch (err: any) {
+
+      console.error(
+        "Failed to update Elasticsearch:",
+        err.message
+      );
+
+    }
+
     res.status(200).json({
       success: true,
       track
