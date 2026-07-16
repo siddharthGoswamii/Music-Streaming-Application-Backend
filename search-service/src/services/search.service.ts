@@ -51,7 +51,7 @@ export const suggestTracks = async (q: string) => {
 
   const suggestions = response.suggest?.track_suggest?.[0]?.options
   
-  // Ensure suggestions is an array before mapping
+
   if (!suggestions || !Array.isArray(suggestions)) {
     return []
   }
