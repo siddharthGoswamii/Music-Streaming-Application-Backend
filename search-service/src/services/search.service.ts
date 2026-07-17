@@ -7,8 +7,14 @@ const CACHE_TTL = 60 * 2  // 2 minutes
 export const searchTracks = async (q: string, type?: string) => {
   const cacheKey = `search:${q}:${type || 'all'}`
 
-  const cached = await redis.get(cacheKey)
-  if (cached) return JSON.parse(cached)
+  const cached = await redis.get(cacheKey);
+
+    if (cached) {
+        console.log("REDIS HIT");
+        return JSON.parse(cached);
+    }
+
+    console.log("REDIS MISS");
 
   const response = await esClient.search({
     index: INDEX,
@@ -28,7 +34,9 @@ export const searchTracks = async (q: string, type?: string) => {
     ...hit._source as object,
   }))
 
-  await redis.set(cacheKey, JSON.stringify(results), { EX: CACHE_TTL })
+  await redis.set(cacheKey, JSON.stringify(results), { EX: CACHE_TTL });
+
+  console.log("Saved to Redis");
 
   return results
 }
