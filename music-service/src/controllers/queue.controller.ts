@@ -103,7 +103,8 @@ export const deleteTrackFromQueue = async (
   res: Response
 ) => {
   try {
-    const { userId, trackId } = req.params;
+    const userId = req.params.userId as string;
+    const trackId = req.params.trackId as string;
 
     const result = await removeFromQueue(
       userId,
@@ -131,7 +132,7 @@ export const clearUserQueue = async (
   res: Response
 ) => {
   try {
-    const { userId } = req.params;
+    const userId = req.params.userId as string;
 
     const result = await clearQueue(userId);
 
