@@ -51,7 +51,7 @@ export const getUserQueue = async (
   res: Response
 ) => {
   try {
-    const { userId } = req.params;
+    const userId = req.params.userId as string;
 
     const queue = await getQueue(userId);
 
