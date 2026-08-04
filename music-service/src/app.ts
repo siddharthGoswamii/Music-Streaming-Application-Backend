@@ -27,7 +27,6 @@ app.use("/history", historyRoutes);
 app.use("/recommendations", recommendationRoutes);
 app.use("/queue", queueRoutes);
 
-
 app.get("/", (_, res) => {
   res.json({
     success: true,
